@@ -13,7 +13,7 @@ class FlatWikiIndex():
         for l in fObject:
             for w in l.split():
                 if not self.Frequencies.__contains__(w):
-                    self.Frequencies[w] = 0
+                    self.Frequencies[w] = 1
                     iterator +=1
                     if iterator%10000 == 0:
                         print str(iterator) + ' parsed words (2016 wiki contains 8392514 words)'
@@ -35,7 +35,7 @@ class FlatWikiIndex():
                 print str(i) + ' documents'
             for w in l.split():
                 if self.Dictionary.__contains__(w):
-                    if not self.Documents[i].contains(self.Dictionary[w]):
+                    if not self.Documents[i].__contains__(self.Dictionary[w]):
                         self.Documents[i][self.Dictionary[w]] = 1
                     else:
                         self.Documents[i][self.Dictionary[w]] += 1
@@ -47,3 +47,6 @@ class FlatWikiIndex():
 
 index = FlatWikiIndex()
 index.createIndex('sample file')
+print index.Documents
+print index.Dictionary
+print index.Frequencies
