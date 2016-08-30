@@ -59,6 +59,7 @@ class FlatWikiIndex():
         print '... created dictionary with ' + str(lght) + ' entries.'
         print 'Creating document identifiers...'
         docs = []
+        fObject.seek(0)
         for i,j in enumerate(fObject):
             if i%10000 == 0:
                 print str(i) + ' document ids assigned (wiki 2016 = 3977901 documents)'
@@ -76,18 +77,26 @@ class FlatWikiIndex():
         worker9 = indexingThread(9, 'Thread-9', self.Dictionary, docs[3200000:3600000])
         worker10 = indexingThread(10, 'Thread-10', self.Dictionary, docs[3600000:])
         print 'Running threads'
-        worker1.run()
-        worker2.run()
-        worker3.run()
-        worker4.run()
-        worker5.run()
-        worker6.run()
-        worker7.run()
-        worker8.run()
-        worker9.run()
-        worker10.run()
-
-
+        worker1.start()
+        worker2.start()
+        worker3.start()
+        worker4.start()
+        worker5.start()
+        worker6.start()
+        worker7.start()
+        worker8.start()
+        worker9.start()
+        worker10.start()
+        worker1.join()
+        worker2.join()
+        worker3.join()
+        worker4.join()
+        worker5.join()
+        worker6.join()
+        worker7.join()
+        worker8.join()
+        worker9.join()
+        worker10.join()
         print 'Successfully created an index'
 
     def saveIndex(self, fDObject, fFObject, fIndObject, fInvIndObject):
