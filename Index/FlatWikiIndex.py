@@ -1,7 +1,6 @@
 __author__ = 'Jakub Dutkiewicz'
-from Index.IIndex import IIndex
 import numpy as np
-class FlatWikiIndex(IIndex):
+class FlatWikiIndex():
     def __init__(self):
         self.Dictionary = {}
         self.Documents = []
