@@ -13,6 +13,8 @@ class indexingThread(threading.Thread):
         self.Dictionary = dictionary
     def run(self):
         print "Starting " + self.name
+        for w in self.Dictionary:
+                self.InverseIndex[w] = []
         for i,l in enumerate(self.Texts):
             self.Documents.append({})
             if i%10000 == 0:
@@ -63,7 +65,7 @@ class FlatWikiIndex():
         for i,j in enumerate(fObject):
             if i%10000 == 0:
                 print str(i) + ' document ids assigned (wiki 2016 = 3977901 documents)'
-            docs[i] = j
+            docs[i].append(j)
 
         print 'Creating 10 workers'
         worker1 = indexingThread(1, 'Thread-1', self.Dictionary, docs[0:400000])
